@@ -1,4 +1,7 @@
 def computador_escolhe_jogada(n, m):
+    #valor = 0
+    #if (n % (m+1)) == 0:
+        
     return valor
 
 def usuario_escolhe_jogada(n, m):
@@ -8,17 +11,53 @@ def usuario_escolhe_jogada(n, m):
         valor = int(input("\nQuantas peças você vai tirar? "))        
     return valor
 
+def jogada_computador(): #Método para reduzir código
+    return valor
+    
+def jogada_usuario(): #Método para reduzir código
+    return valor
+
 def partida():
     n = int(input("Quantas peças? "))
     m = int(input("Limite de peças por jogada? "))
-    valor = 0
+    while m >= n:
+        print("A quantidade de peças por jogadas deve ser menor que as peças totais")
+        m = int(input("Limite de peças por jogada? "))
     
-    if (n % m+1) == 0:
-        print("Você pode começar...")
-        valor = usuario_escolhe_jogada(n, m)
+    valor = 0
+    jogada = 0
+    if (n % (m+1)) == 0:
+        print("\nVocê pode começar...")
+        jogada = 1 #Vez do usuario
+        while n > 1:
+            if jogada == 1:
+                valor = usuario_escolhe_jogada(n, m)
+                print("Você tirou", valor, "peça(s).")
+                n = n - valor
+                print("Agora restam", n, "peças no tabuleiro.")
+                jogada = 2
+            else:
+                valor = computador_escolhe_jogada(n, m)
+                print("O computador tirou", valor, "peça(s)")
+                n = n - valor
+                print("Agora restam", n, "peças no tabuleiro.")
+                jogada = 1
     else:
-        print("O computador começa!")
-            
+        print("\nComputador começa!")
+        jogada = 2 #Vez do computador
+        while n > 1:
+            if jogada == 2:
+                valor = computador_escolhe_jogada(n, m)
+                print("O computador tirou", valor, "peça(s)")
+                n = n - valor
+                print("Agora restam", n, "peças no tabuleiro.")
+                jogada = 1
+            else:
+                valor = usuario_escolhe_jogada(n, m)
+                print("Você tirou", valor, "peça(s).")
+                n = n - valor
+                print("Agora restam", n, "peças no tabuleiro.")
+                jogada = 2                                  
 
 def campeonato():
     quantidade_partida = 1
